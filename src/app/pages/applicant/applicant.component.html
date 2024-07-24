@@ -1,0 +1,68 @@
+<div *ngIf="applicant" class="applicant-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title
+                >{{ applicant.name }} {{ applicant.surname }}</mat-card-title
+            >
+            <mat-card-subtitle>
+                {{ applicant.professionalArea }} |
+                {{ applicant.qualification }} |
+                {{ applicant.salary | currency }}
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                <strong>Professional Area:</strong>
+                {{ applicant.professionalArea }}
+            </p>
+            <p><strong>Qualification:</strong> {{ applicant.qualification }}</p>
+            <p><strong>Salary:</strong> {{ applicant.salary | currency }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button
+                mat-fab
+                extended
+                color="primary"
+                (click)="findVacancies()"
+                [disabled="applicant.isHired"
+            >
+                <mat-icon>search</mat-icon>
+                Find vacancies
+            </button>
+            <button mat-fab extended color="primary" (click)="openEditDialog()">
+                <mat-icon>edit</mat-icon>
+                Edit
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <div
+        *ngIf="!applicant.isHired && appropriateVacancies.length > 0"
+        class="vacancies-container"
+    >
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Available Vacancies</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item *ngFor="let vacancy of appropriateVacancies">
+                        <div>
+                            {{ vacancy.jobPosition }} -
+                            {{ vacancy.salary | currency }}
+                        </div>
+                        <button
+                            mat-fab
+                            extended
+                            color="primary"
+                            (click)="createAgreement(vacancy)"
+                        >
+                            <mat-icon>check</mat-icon>
+                            Create agreement
+                        </button>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>
+    {{ mode === 'create' ? 'Create New Vacancy' : 'Update Vacancy' }}
+</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <mat-form-field>
+            <mat-label>Employer</mat-label>
+            <input matInput formControlName="employer" required />
+            <mat-error *ngIf="form.get('employer')?.invalid">
+                {{ errorMessage.employer }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Job Position</mat-label>
+            <mat-select formControlName="jobPosition" required>
+                <mat-option
+                    *ngFor="let position of jobPositions"
+                    [value]="position"
+                >
+                    {{ position }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('jobPosition')?.invalid">
+                {{ errorMessage.jobPosition }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Professional Area</mat-label>
+            <input matInput formControlName="professionalArea" />
+            <mat-error *ngIf="form.get('professionalArea')?.invalid">
+                {{ errorMessage.professionalArea }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Salary</mat-label>
+            <input matInput formControlName="salary" required />
+            <mat-error *ngIf="form.get('salary')?.invalid">
+                {{ errorMessage.salary }}
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-fab extended type="button" (click)="onCancel()">
+            <mat-icon>cancel</mat-icon>
+            Cancel
+        </button>
+        <button mat-fab extended color="primary" type="submit">
+            <mat-icon>done</mat-icon>
+            {{ mode === 'create' ? 'Create' : 'Update' }}
+        </button>
+    </mat-dialog-actions>
+</form>

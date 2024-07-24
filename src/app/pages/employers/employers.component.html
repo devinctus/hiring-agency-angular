@@ -1,0 +1,71 @@
+<div class="employers-container">
+    <div class="employers-header">
+        <h2>Employers</h2>
+        <button mat-fab extended color="primary" (click)="openCreateDialog()">
+            <mat-icon>add</mat-icon>
+            Create New Employer
+        </button>
+    </div>
+
+    <div class="employers-list">
+        <ng-container *ngFor="let employer of filteredEmployers; let i = index">
+            <mat-card
+                *ngIf="
+                    i >= pageIndex * pageSize && i < (pageIndex + 1) * pageSize
+                "
+            >
+                <mat-card-title>
+                    {{ employer.companyName }}
+                </mat-card-title>
+
+                <mat-card-subtitle>
+                    <p>Professional Area: {{ employer.professionalArea }}</p>
+                </mat-card-subtitle>
+                <mat-card-subtitle>
+                    <p>Address: {{ employer.address }}</p>
+                </mat-card-subtitle>
+                <mat-card-content>
+                    <p>Phone: {{ employer.phone }}</p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button
+                        mat-fab
+                        extended
+                        color="accent"
+                        (click)="openUpdateDialog(employer)"
+                    >
+                        <mat-icon>edit</mat-icon>
+                        Edit
+                    </button>
+                    <button
+                        mat-fab
+                        extended
+                        color="accent"
+                        (click)="deleteEmployer(employer._id)"
+                    >
+                        <mat-icon>delete</mat-icon>
+                        Delete
+                    </button>
+                    <button
+                        mat-fab
+                        extended
+                        color="primary"
+                        [routerLink]="['/employers', employer._id]"
+                    >
+                        <mat-icon>info</mat-icon>
+                        Details
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </div>
+
+    <mat-paginator
+        [length]="filteredEmployers.length"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        (page)="changePage($event)"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+    ></mat-paginator>
+</div>

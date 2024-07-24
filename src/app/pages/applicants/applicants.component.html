@@ -1,0 +1,74 @@
+<div class="applicants-container">
+    <div class="applicants-header">
+        <h2>Applicants</h2>
+        <button mat-fab extended color="primary" (click)="openCreateDialog()">
+            <mat-icon>add</mat-icon>
+            Create New Applicant
+        </button>
+    </div>
+
+    <div class="applicants-list">
+        <ng-container
+            *ngFor="let applicant of filteredApplicants; let i = index"
+        >
+            <mat-card
+                *ngIf="
+                    i >= pageIndex * pageSize && i < (pageIndex + 1) * pageSize
+                "
+            >
+                <mat-card-title>
+                    {{ applicant.name }} {{ applicant.patronymic }}
+                    {{ applicant.surname }}
+                </mat-card-title>
+
+                <mat-card-subtitle>
+                    <p>Professional Area: {{ applicant.professionalArea }}</p>
+                </mat-card-subtitle>
+                <mat-card-subtitle>
+                    <p>Qualification: {{ applicant.qualification }}</p>
+                </mat-card-subtitle>
+                <mat-card-content>
+                    <p>Salary: {{ applicant.salary | currency }}</p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button
+                        mat-fab
+                        extended
+                        color="accent"
+                        (click)="openUpdateDialog(applicant)"
+                    >
+                        <mat-icon>edit</mat-icon>
+                        Edit
+                    </button>
+                    <button
+                        mat-fab
+                        extended
+                        color="accent"
+                        (click)="deleteApplicant(applicant._id)"
+                    >
+                        <mat-icon>delete</mat-icon>
+                        Delete
+                    </button>
+                    <button
+                        mat-fab
+                        extended
+                        color="primary"
+                        [routerLink]="['/applicants', applicant._id]"
+                    >
+                        <mat-icon>info</mat-icon>
+                        Details
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </div>
+
+    <mat-paginator
+        [length]="filteredApplicants.length"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        (page)="changePage($event)"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+    ></mat-paginator>
+</div>
