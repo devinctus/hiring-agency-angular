@@ -1,10 +1,8 @@
-import { IEmployer } from './employer';
-
 export interface IVacancy {
     _id: string;
-    employer: IEmployer;
+    employer: string;
     jobPosition: string;
     professionalArea: string;
-    salary: number;
-    isOpen?: boolean;
+    salary: string;
+    isOpen: boolean;
 }

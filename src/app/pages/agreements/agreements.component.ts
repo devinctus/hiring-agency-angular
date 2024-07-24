@@ -68,7 +68,7 @@ export class AgreementsComponent implements OnInit, OnDestroy {
             this.agreements = data;
             this.totalAgreements = data.length;
             this.totalEarnings = data.reduce(
-                (sum, agr) => sum + (agr.fees | 0),
+                (sum, agr) => sum + parseFloat(agr.fees || '0'),
                 0,
             );
             this.applyFilter();

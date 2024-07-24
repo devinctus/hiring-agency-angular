@@ -1,5 +1,5 @@
 export interface IEmployer {
-    _id?: string;
+    _id: string;
     companyName: string;
     professionalArea: string;
     address: string;

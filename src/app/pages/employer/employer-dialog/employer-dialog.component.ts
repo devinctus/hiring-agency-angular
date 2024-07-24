@@ -35,6 +35,7 @@ interface IErrorMessage {
 }
 
 const emptyEmployer: IEmployer = {
+    _id: '',
     companyName: '',
     professionalArea: '',
     address: '',
@@ -136,7 +137,7 @@ export class EmployerDialogComponent implements OnInit {
             });
         } else if (this.mode === 'update') {
             this.employerService
-                .update(this.employer._id as string, employerData)
+                .update(this.employer._id, employerData)
                 .subscribe({
                     next: () => {
                         this.dialogRef.close(true);

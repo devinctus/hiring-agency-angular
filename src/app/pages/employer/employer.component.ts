@@ -70,10 +70,10 @@ export class EmployerComponent implements OnInit {
         this.vacancyService.getAll().subscribe({
             next: (vacancies) => {
                 this.openedVacancies = vacancies.filter(
-                    (v) => v.employer._id === employerId && v.isOpen,
+                    (v) => v.employer === employerId && v.isOpen,
                 );
                 this.closedVacancies = vacancies.filter(
-                    (v) => v.employer._id === employerId && !v.isOpen,
+                    (v) => v.employer === employerId && !v.isOpen,
                 );
             },
             error: () => this.handleErrorResponse('Error fetching vacancies'),
