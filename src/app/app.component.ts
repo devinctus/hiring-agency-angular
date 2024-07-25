@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -7,8 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { FilterService } from './services/filter.service';
+import { filter } from 'rxjs';
 
 @Component({
     standalone: true,
@@ -26,13 +27,40 @@ import { FilterService } from './services/filter.service';
         MatButtonToggleModule,
     ],
 })
-export class AppComponent {
-    title = 'Hiring Agency';
-
+export class AppComponent implements OnInit {
+    showFilters: boolean = false;
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private filterService: FilterService,
     ) {}
+
+    ngOnInit() {
+        this.router.events
+            .pipe(filter((event) => event instanceof NavigationEnd))
+            .subscribe(() => {
+                this.checkRoute(this.router.url);
+            });
+
+        this.checkRoute(this.router.url);
+    }
+
+    private checkRoute(url: string) {
+        const expectedRoutes = [
+            '/applicants',
+            '/employers',
+            '/agreements',
+            '/vacancies',
+        ];
+
+        if (!this.isLoggedIn() && url !== '/login' && url !== '/registration') {
+            this.router.navigate(['/login']);
+        } else {
+            this.showFilters =
+                expectedRoutes.some((route) => url.startsWith(route)) &&
+                url.split('/').length < 3;
+        }
+    }
 
     isLoggedIn(): boolean {
         return !!localStorage.getItem('token');
