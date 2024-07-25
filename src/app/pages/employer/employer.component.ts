@@ -108,7 +108,8 @@ export class EmployerComponent implements OnInit {
         const dialogRef = this.dialog.open(VacancyDialogComponent, {
             width: '400px',
             data: {
-                mode: 'create',
+                mode: 'update',
+                isEmployerPage: true,
                 vacancy: {
                     employer: this.employer,
                     professionalArea: this.employer.professionalArea,

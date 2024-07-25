@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IVacancy } from '../models/vacancy';
+import { IVacancy, IServerVacancy } from '../models/vacancy';
 
 @Injectable({
     providedIn: 'root',
@@ -19,12 +19,15 @@ export class VacancyService {
         return this.http.get<IVacancy>(`${this.apiUrl}/${id}`);
     }
 
-    create(vacancy: IVacancy): Observable<IVacancy> {
-        return this.http.post<IVacancy>(`${this.apiUrl}/create`, vacancy);
+    create(vacancy: IServerVacancy): Observable<IServerVacancy> {
+        return this.http.post<IServerVacancy>(`${this.apiUrl}/create`, vacancy);
     }
 
-    update(id: string, vacancy: IVacancy): Observable<IVacancy> {
-        return this.http.put<IVacancy>(`${this.apiUrl}/update/${id}`, vacancy);
+    update(id: string, vacancy: IServerVacancy): Observable<IServerVacancy> {
+        return this.http.put<IServerVacancy>(
+            `${this.apiUrl}/update/${id}`,
+            vacancy,
+        );
     }
 
     delete(id: string): Observable<void> {

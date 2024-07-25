@@ -1,12 +1,12 @@
 <div class="employer-container">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>{{ employer.companyName }}</mat-card-title>
+            <mat-card-title>{{ employer?.companyName }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <p><strong>Area:</strong> {{ employer.professionalArea }}</p>
-            <p><strong>Address:</strong> {{ employer.address }}</p>
-            <p><strong>Phone:</strong> {{ employer.phone }}</p>
+            <p><strong>Area:</strong> {{ employer?.professionalArea }}</p>
+            <p><strong>Address:</strong> {{ employer?.address }}</p>
+            <p><strong>Phone:</strong> {{ employer?.phone }}</p>
         </mat-card-content>
         <mat-card-actions>
             <button mat-fab extended color="accent" (click)="openEditDialog()">
@@ -30,9 +30,11 @@
             <mat-list>
                 <mat-list-item *ngFor="let vacancy of openedVacancies">
                     <div class="list-item">
-                        <a [routerLink]="['/vacancies', vacancy._id]">{{
-                            vacancy.jobPosition
-                        }}</a>
+                        <a
+                            color="accent"
+                            [routerLink]="['/vacancies', vacancy._id]"
+                            >{{ vacancy.jobPosition }}</a
+                        >
                         <p>
                             <strong>Salary:</strong>
                             {{ vacancy.salary | currency }}

@@ -19,12 +19,19 @@ mat-card-title {
 
 mat-tab-group {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+    justify-content: center;
+    align-items: center;
 }
 
-list-item {
+.list-item {
+    width: 100%;
     a {
         text-decoration: none;
     }
     display: flex;
+    column-gap: 50px;
     justify-content: space-between;
 }

@@ -1,3 +1,6 @@
+import { IEmployer } from './models/employer';
+import { IVacancy } from './models/vacancy';
+
 export const PROFESSIONAL_AREAS: Record<string, string[]> = {
     'Information Technology': [
         'Software Engineer',
@@ -119,4 +122,21 @@ export const PROFESSIONAL_AREAS: Record<string, string[]> = {
         'Carpenter',
         'Surveyor',
     ],
+};
+
+export const emptyEmployer: IEmployer = {
+    _id: '',
+    companyName: '',
+    professionalArea: '',
+    address: '',
+    phone: '',
+};
+
+export const emptyVacancy: IVacancy = {
+    _id: '',
+    employer: emptyEmployer,
+    jobPosition: '',
+    professionalArea: '',
+    salary: 0,
+    isOpen: true,
 };

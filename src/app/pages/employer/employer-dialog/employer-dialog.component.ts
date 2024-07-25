@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PROFESSIONAL_AREAS } from '../../../constants';
+import { PROFESSIONAL_AREAS, emptyEmployer } from '../../../constants';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 
@@ -33,14 +33,6 @@ interface IErrorMessage {
     address?: string;
     phone?: string;
 }
-
-const emptyEmployer: IEmployer = {
-    _id: '',
-    companyName: '',
-    professionalArea: '',
-    address: '',
-    phone: '',
-};
 
 @Component({
     standalone: true,

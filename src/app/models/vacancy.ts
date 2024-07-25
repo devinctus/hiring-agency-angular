@@ -5,6 +5,13 @@ export interface IVacancy {
     employer: IEmployer;
     jobPosition: string;
     professionalArea: string;
-    salary: string;
+    salary: number;
     isOpen: boolean;
+}
+
+export interface IServerVacancy {
+    employerId: string;
+    jobPosition: string;
+    professionalArea: string;
+    salary: number;
 }
