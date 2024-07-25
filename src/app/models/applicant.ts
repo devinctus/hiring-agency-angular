@@ -5,6 +5,6 @@ export interface IApplicant {
     patronymic: string;
     qualification: string;
     professionalArea: string;
-    salary: string;
+    salary: number;
     isHired: boolean;
 }

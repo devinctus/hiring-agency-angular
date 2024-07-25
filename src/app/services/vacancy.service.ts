@@ -34,7 +34,9 @@ export class VacancyService {
         return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
     }
 
-    close(id: string): Observable<IVacancy> {
-        return this.http.put<IVacancy>(`${this.apiUrl}/close/${id}`, {});
+    changeStatus(id: string, isOpen: boolean): Observable<IVacancy> {
+        return this.http.put<IVacancy>(`${this.apiUrl}/change-status/${id}`, {
+            isOpen,
+        });
     }
 }

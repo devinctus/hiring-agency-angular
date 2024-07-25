@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PROFESSIONAL_AREAS } from '../../../constants';
+import { PROFESSIONAL_AREAS, emptyApplicant } from '../../../constants';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 
@@ -35,17 +35,6 @@ interface IErrorMessage {
     qualification?: string;
     salary?: string;
 }
-
-const emptyApplicant: IApplicant = {
-    _id: '',
-    name: '',
-    surname: '',
-    patronymic: '',
-    professionalArea: '',
-    qualification: '',
-    salary: '',
-    isHired: false,
-};
 
 @Component({
     standalone: true,

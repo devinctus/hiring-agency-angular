@@ -34,7 +34,9 @@ export class ApplicantService {
         return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
     }
 
-    hire(id: string): Observable<IApplicant> {
-        return this.http.put<IApplicant>(`${this.apiUrl}/hire/${id}`, {});
+    changeStatus(id: string, isHired: boolean): Observable<IApplicant> {
+        return this.http.put<IApplicant>(`${this.apiUrl}/change-status/${id}`, {
+            isHired,
+        });
     }
 }

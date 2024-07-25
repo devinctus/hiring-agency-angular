@@ -1,3 +1,4 @@
+import { IApplicant } from './models/applicant';
 import { IEmployer } from './models/employer';
 import { IVacancy } from './models/vacancy';
 
@@ -130,6 +131,17 @@ export const emptyEmployer: IEmployer = {
     professionalArea: '',
     address: '',
     phone: '',
+};
+
+export const emptyApplicant: IApplicant = {
+    _id: '',
+    name: '',
+    surname: '',
+    patronymic: '',
+    professionalArea: '',
+    qualification: '',
+    salary: 0,
+    isHired: false,
 };
 
 export const emptyVacancy: IVacancy = {

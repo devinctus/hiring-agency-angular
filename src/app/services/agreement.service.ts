@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IAgreement } from '../models/agreement';
+import { IAgreement, IServerAgreement } from '../models/agreement';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AgreementService {
-    private apiUrl = 'http://localhost:5000/api/agreements'; // Replace with your backend URL
+    private apiUrl = 'http://localhost:5000/api/agreements';
 
     constructor(private http: HttpClient) {}
 
@@ -19,12 +19,18 @@ export class AgreementService {
         return this.http.get<IAgreement>(`${this.apiUrl}/${id}`);
     }
 
-    create(agreement: IAgreement): Observable<IAgreement> {
-        return this.http.post<IAgreement>(`${this.apiUrl}/create`, agreement);
+    create(agreement: IServerAgreement): Observable<IServerAgreement> {
+        return this.http.post<IServerAgreement>(
+            `${this.apiUrl}/create`,
+            agreement,
+        );
     }
 
-    update(id: string, agreement: IAgreement): Observable<IAgreement> {
-        return this.http.put<IAgreement>(
+    update(
+        id: string,
+        agreement: IServerAgreement,
+    ): Observable<IServerAgreement> {
+        return this.http.put<IServerAgreement>(
             `${this.apiUrl}/update/${id}`,
             agreement,
         );

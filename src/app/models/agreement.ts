@@ -9,3 +9,11 @@ export interface IAgreement {
     professionalArea: string;
     fees: string;
 }
+
+export interface IServerAgreement {
+    employerId: string;
+    applicantId: string;
+    jobPosition: string;
+    professionalArea: string;
+    fees: number;
+}

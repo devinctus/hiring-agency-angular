@@ -1,15 +1,9 @@
-<!-- <div *ngIf="applicant" class="applicant-container">
+<div *ngIf="applicant" class="applicant-container">
     <mat-card>
-        <mat-card-header>
-            <mat-card-title
-                >{{ applicant.name }} {{ applicant.surname }}</mat-card-title
-            >
-            <mat-card-subtitle>
-                {{ applicant.professionalArea }} |
-                {{ applicant.qualification }} |
-                {{ applicant.salary | currency }}
-            </mat-card-subtitle>
-        </mat-card-header>
+        <mat-card-title>
+            {{ applicant.name }} {{ applicant.patronymic }}
+            {{ applicant.surname }}
+        </mat-card-title>
         <mat-card-content>
             <p>
                 <strong>Professional Area:</strong>
@@ -17,6 +11,10 @@
             </p>
             <p><strong>Qualification:</strong> {{ applicant.qualification }}</p>
             <p><strong>Salary:</strong> {{ applicant.salary | currency }}</p>
+            <p *ngIf="applicant.isHired"><strong>Status:</strong> Hired</p>
+            <p *ngIf="applicant.isHired === false">
+                <strong>Status:</strong> Open to work
+            </p>
         </mat-card-content>
         <mat-card-actions>
             <button
@@ -24,14 +22,18 @@
                 extended
                 color="primary"
                 (click)="findVacancies()"
-                [disabled="applicant.isHired"
+                [disabled]="applicant.isHired"
             >
                 <mat-icon>search</mat-icon>
-                Find vacancies
+                Vacancies
             </button>
             <button mat-fab extended color="primary" (click)="openEditDialog()">
                 <mat-icon>edit</mat-icon>
                 Edit
+            </button>
+            <button mat-fab extended color="primary" (click)="changeStatus()">
+                <mat-icon>work</mat-icon>
+                Change status
             </button>
         </mat-card-actions>
     </mat-card>
@@ -40,29 +42,29 @@
         *ngIf="!applicant.isHired && appropriateVacancies.length > 0"
         class="vacancies-container"
     >
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Available Vacancies</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <mat-list>
-                    <mat-list-item *ngFor="let vacancy of appropriateVacancies">
-                        <div>
-                            {{ vacancy.jobPosition }} -
-                            {{ vacancy.salary | currency }}
-                        </div>
-                        <button
-                            mat-fab
-                            extended
-                            color="primary"
-                            (click)="createAgreement(vacancy)"
+        <ng-container *ngFor="let vacancy of appropriateVacancies">
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="vacancy-info">
+                        <span>{{ vacancy.jobPosition }}</span>
+                        <span
+                            >Employer: {{ vacancy.employer.companyName }}</span
                         >
-                            <mat-icon>check</mat-icon>
-                            Create agreement
-                        </button>
-                    </mat-list-item>
-                </mat-list>
-            </mat-card-content>
-        </mat-card>
+                        <span>Salary:{{ vacancy.salary | currency }}</span>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <button
+                        mat-fab
+                        extended
+                        color="primary"
+                        (click)="createAgreement(vacancy)"
+                    >
+                        <mat-icon>check</mat-icon>
+                        Create agreement
+                    </button>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </ng-container>
     </div>
-</div> -->
+</div>

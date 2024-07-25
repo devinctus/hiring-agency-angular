@@ -1,9 +1,24 @@
 .applicant-container {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-item {
+    display: flex;
+}
+
+.vacancy-info {
+    display: flex;
+    flex-direction: column;
+    background: lightblue;
 }
 
 mat-card {
     margin-bottom: 20px;
+    width: 500px;
 }
 
 mat-card-title {
@@ -11,18 +26,16 @@ mat-card-title {
     font-weight: bold;
 }
 
-mat-card-subtitle {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
+mat-card-content {
+    margin-left: 0;
 }
 
 mat-card-actions {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     gap: 10px;
 }
 
-.vacancies-container mat-card {
-    margin-top: 20px;
+.vacancies-container {
+    width: 500px;
 }
