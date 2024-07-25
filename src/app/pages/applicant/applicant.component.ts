@@ -140,6 +140,7 @@ export class ApplicantComponent implements OnInit, OnDestroy {
                             verticalPosition: 'top',
                         },
                     );
+                    this.getApplicant(this.applicant._id);
                     this.findVacancies();
                 },
                 error: () =>

@@ -1,1 +1,71 @@
-<p>vacancy works!</p>
+<div *ngIf="vacancy" class="vacancy-container">
+    <mat-card>
+        <mat-card-title>
+            {{ vacancy.jobPosition }}
+        </mat-card-title>
+        <mat-card-content>
+            <p>
+                <strong>Professional Area:</strong>
+                {{ vacancy.professionalArea }}
+            </p>
+            <p><strong>Salary:</strong> {{ vacancy.salary | currency }}</p>
+            <p *ngIf="vacancy.isOpen"><strong>Status:</strong> Open</p>
+            <p *ngIf="vacancy.isOpen === false">
+                <strong>Status:</strong> Closed
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button
+                mat-fab
+                extended
+                color="primary"
+                (click)="findApplicants()"
+                [disabled]="!vacancy.isOpen"
+            >
+                <mat-icon>search</mat-icon>
+                Applicants
+            </button>
+            <button mat-fab extended color="primary" (click)="openEditDialog()">
+                <mat-icon>edit</mat-icon>
+                Edit
+            </button>
+            <button mat-fab extended color="primary" (click)="changeStatus()">
+                <mat-icon>lock</mat-icon>
+                Change status
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <div
+        *ngIf="vacancy.isOpen && appropriateApplicants.length > 0"
+        class="applicants-container"
+    >
+        <ng-container *ngFor="let applicant of appropriateApplicants">
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="applicant-info">
+                        <span>
+                            {{ applicant.name }} {{ applicant.patronymic }}
+                            {{ applicant.surname }}
+                        </span>
+                        <span
+                            >Qualification: {{ applicant.qualification }}</span
+                        >
+                        <span>Salary:{{ applicant.salary | currency }}</span>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <button
+                        mat-fab
+                        extended
+                        color="primary"
+                        (click)="createAgreement(applicant)"
+                    >
+                        <mat-icon>check</mat-icon>
+                        Create agreement
+                    </button>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </ng-container>
+    </div>
+</div>
