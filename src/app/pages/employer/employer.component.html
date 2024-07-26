@@ -28,39 +28,45 @@
     <mat-tab-group>
         <mat-tab label="Opened Vacancies">
             <mat-list>
-                <mat-list-item *ngFor="let vacancy of openedVacancies">
-                    <div class="list-item">
-                        <a
-                            color="accent"
-                            [routerLink]="['/vacancies', vacancy._id]"
-                            >{{ vacancy.jobPosition }}</a
-                        >
-                        <p>
-                            <strong>Salary:</strong>
-                            {{ vacancy.salary | currency }}
-                        </p>
-                    </div>
-                </mat-list-item>
+                <mat-card *ngFor="let vacancy of openedVacancies">
+                    <mat-card-subtitle>
+                        <a [routerLink]="['/vacancies', vacancy._id]">
+                            {{ vacancy.jobPosition }}
+                        </a>
+                    </mat-card-subtitle>
+                    <mat-divider></mat-divider>
+                    <mat-card-content>
+                        <p>Salary: {{ vacancy.salary | currency }}</p>
+                    </mat-card-content>
+                </mat-card>
             </mat-list>
         </mat-tab>
         <mat-tab label="Closed Vacancies">
             <mat-list>
-                <mat-list-item *ngFor="let vacancy of closedVacancies">
-                    <a [routerLink]="['/vacancies', vacancy._id]">{{
-                        vacancy.jobPosition
-                    }}</a>
-                    <p>
-                        <strong>Salary:</strong> {{ vacancy.salary | currency }}
-                    </p>
-                </mat-list-item>
+                <mat-card *ngFor="let vacancy of closedVacancies">
+                    <mat-card-subtitle>
+                        <a [routerLink]="['/vacancies', vacancy._id]">
+                            {{ vacancy.jobPosition }}
+                        </a>
+                    </mat-card-subtitle>
+                    <mat-divider></mat-divider>
+                    <mat-card-content>
+                        <p>Salary: {{ vacancy.salary | currency }}</p>
+                    </mat-card-content>
+                </mat-card>
             </mat-list>
         </mat-tab>
         <mat-tab label="Agreements">
             <mat-list>
-                <mat-list-item *ngFor="let agreement of agreements">
-                    {{ agreement.jobPosition }} -
-                    {{ agreement.fees | currency }}
-                </mat-list-item>
+                <mat-card *ngFor="let agreement of agreements">
+                    <mat-card-subtitle>
+                        <p>{{ agreement.jobPosition }}</p>
+                    </mat-card-subtitle>
+                    <mat-divider></mat-divider>
+                    <mat-card-content>
+                        <p>Fees: {{ agreement.fees | currency }}</p>
+                    </mat-card-content>
+                </mat-card>
             </mat-list>
         </mat-tab>
     </mat-tab-group>
