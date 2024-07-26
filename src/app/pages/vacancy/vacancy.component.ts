@@ -8,6 +8,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { ApplicantService } from '../../services/applicant.service';
+import { EmployerService } from '../../services/employer.service';
 import { VacancyService } from '../../services/vacancy.service';
 import { AgreementService } from '../../services/agreement.service';
 import { IApplicant } from '../../models/applicant';
@@ -36,12 +37,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 })
 export class VacancyComponent implements OnInit, OnDestroy {
     vacancy!: IVacancy;
+    employerCompanyName!: string;
     appropriateApplicants: IApplicant[] = [];
     subscriptions: Subscription = new Subscription();
 
     constructor(
         private route: ActivatedRoute,
         private applicantService: ApplicantService,
+        private employerService: EmployerService,
         private vacancyService: VacancyService,
         private agreementService: AgreementService,
         private dialog: MatDialog,
@@ -62,7 +65,20 @@ export class VacancyComponent implements OnInit, OnDestroy {
     getVacancy(id: string): void {
         this.subscriptions.add(
             this.vacancyService.getById(id).subscribe({
-                next: (vacancy) => (this.vacancy = vacancy),
+                next: (vacancy) => {
+                    this.vacancy = vacancy;
+                    this.employerService
+                        .getById(this.vacancy.employer as unknown as string)
+                        .subscribe({
+                            next: (employer) => {
+                                this.employerCompanyName = employer.companyName;
+                            },
+                            error: () =>
+                                this.handleErrorResponse(
+                                    'Error fetching employer details',
+                                ),
+                        });
+                },
                 error: () =>
                     this.handleErrorResponse('Error fetching vacancy details'),
             }),
@@ -80,6 +96,16 @@ export class VacancyComponent implements OnInit, OnDestroy {
                                 a.salary < this.vacancy.salary &&
                                 !a.isHired,
                         );
+                        if (this.appropriateApplicants.length === 0) {
+                            this.snackBar.open(
+                                'No available applicant for this vacancy',
+                                'Close',
+                                {
+                                    duration: 3000,
+                                    verticalPosition: 'top',
+                                },
+                            );
+                        }
                     },
                     error: () =>
                         this.handleErrorResponse('Error fetching applicants'),

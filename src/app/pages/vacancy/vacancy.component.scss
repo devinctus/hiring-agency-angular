@@ -1,9 +1,13 @@
-.Vacancy-container {
+.vacancy-container {
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.applicants-container {
+    width: 500px;
 }
 
 .list-item {
@@ -34,8 +38,4 @@ mat-card-actions {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-}
-
-.applicants-container {
-    width: 500px;
 }

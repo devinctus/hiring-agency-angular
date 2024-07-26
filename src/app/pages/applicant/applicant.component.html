@@ -43,17 +43,17 @@
         class="vacancies-container"
     >
         <ng-container *ngFor="let vacancy of appropriateVacancies">
-            <mat-grid-list cols="2" rowHeight="100px">
-                <mat-grid-tile>
-                    <div class="vacancy-info">
-                        <span>{{ vacancy.jobPosition }}</span>
-                        <span
-                            >Employer: {{ vacancy.employer.companyName }}</span
-                        >
-                        <span>Salary:{{ vacancy.salary | currency }}</span>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile>
+            <mat-card>
+                <mat-card-subtitle>
+                    <a [routerLink]="['/vacancies', vacancy._id]">
+                        {{ vacancy.jobPosition }}
+                    </a>
+                </mat-card-subtitle>
+                <mat-card-content>
+                    <p>Employer: {{ vacancy.employer.companyName }}</p>
+                    <p>Salary: {{ vacancy.salary | currency }}</p>
+                </mat-card-content>
+                <mat-card-actions>
                     <button
                         mat-fab
                         extended
@@ -63,8 +63,8 @@
                         <mat-icon>check</mat-icon>
                         Create agreement
                     </button>
-                </mat-grid-tile>
-            </mat-grid-list>
+                </mat-card-actions>
+            </mat-card>
         </ng-container>
     </div>
 </div>

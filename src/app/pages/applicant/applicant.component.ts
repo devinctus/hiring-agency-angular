@@ -83,6 +83,16 @@ export class ApplicantComponent implements OnInit, OnDestroy {
                                 v.salary > this.applicant.salary &&
                                 v.isOpen,
                         );
+                        if (this.appropriateVacancies.length === 0) {
+                            this.snackBar.open(
+                                'No available vacancies for this applicant',
+                                'Close',
+                                {
+                                    duration: 3000,
+                                    verticalPosition: 'top',
+                                },
+                            );
+                        }
                     },
                     error: () =>
                         this.handleErrorResponse('Error fetching vacancies'),
