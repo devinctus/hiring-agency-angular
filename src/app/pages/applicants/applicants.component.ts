@@ -43,6 +43,7 @@ export class ApplicantsComponent implements OnInit, OnDestroy {
     pageIndex = 0;
     filteredApplicants: IApplicant[] = [];
     professionalAreaFilter = 'All';
+    applicantStatusFilter = 'All';
 
     constructor(
         private applicantService: ApplicantService,
@@ -76,9 +77,20 @@ export class ApplicantsComponent implements OnInit, OnDestroy {
     applyFilter(): void {
         this.filteredApplicants = this.applicants.filter(
             (applicant) =>
-                this.professionalAreaFilter === 'All' ||
-                applicant.professionalArea === this.professionalAreaFilter,
+                (this.professionalAreaFilter === 'All' ||
+                    applicant.professionalArea ===
+                        this.professionalAreaFilter) &&
+                (this.applicantStatusFilter === 'All' ||
+                    (this.applicantStatusFilter === 'Opened to work' &&
+                        !applicant.isHired) ||
+                    (this.applicantStatusFilter === 'Hired' &&
+                        applicant.isHired)),
         );
+    }
+
+    onApplicantStatusChange(status: string): void {
+        this.applicantStatusFilter = status;
+        this.applyFilter();
     }
 
     changePage(event: PageEvent): void {

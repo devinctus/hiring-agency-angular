@@ -1,5 +1,14 @@
 <div class="vacancies-container">
     <div class="vacancies-header">
+        <mat-button-toggle-group
+            name="vacancyStatus"
+            aria-label="Vacancy Status"
+            (change)="onVacancyStatusChange($event.value)"
+        >
+            <mat-button-toggle value="All"> All </mat-button-toggle>
+            <mat-button-toggle value="Opened"> Opened </mat-button-toggle>
+            <mat-button-toggle value="Closed"> Closed </mat-button-toggle>
+        </mat-button-toggle-group>
         <h2>Vacancies</h2>
         <button mat-fab extended color="primary" (click)="openCreateDialog()">
             <mat-icon>add</mat-icon>

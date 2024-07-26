@@ -43,6 +43,7 @@ export class VacanciesComponent implements OnInit, OnDestroy {
     pageIndex = 0;
     filteredVacancies: IVacancy[] = [];
     professionalAreaFilter = 'All';
+    vacancyStatusFilter = 'All';
 
     constructor(
         private vacancyService: VacancyService,
@@ -76,9 +77,17 @@ export class VacanciesComponent implements OnInit, OnDestroy {
     applyFilter(): void {
         this.filteredVacancies = this.vacancies.filter(
             (vacancy) =>
-                this.professionalAreaFilter === 'All' ||
-                vacancy.professionalArea === this.professionalAreaFilter,
+                (this.professionalAreaFilter === 'All' ||
+                    vacancy.professionalArea === this.professionalAreaFilter) &&
+                (this.vacancyStatusFilter === 'All' ||
+                    (this.vacancyStatusFilter === 'Opened' && vacancy.isOpen) ||
+                    (this.vacancyStatusFilter === 'Closed' && !vacancy.isOpen)),
         );
+    }
+
+    onVacancyStatusChange(status: string): void {
+        this.vacancyStatusFilter = status;
+        this.applyFilter();
     }
 
     changePage(event: PageEvent): void {
