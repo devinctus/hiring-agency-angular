@@ -1,0 +1,38 @@
+.registration-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // Full viewport height
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    row-gap: 10px;
+}
+
+mat-form-field {
+    width: 250px;
+}
+
+.registration-button {
+    width: 250px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.text-link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.route {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}

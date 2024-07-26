@@ -1,0 +1,41 @@
+.applicant-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-item {
+    display: flex;
+}
+
+.vacancy-info {
+    display: flex;
+    flex-direction: column;
+    background: lightblue;
+}
+
+mat-card {
+    margin-bottom: 20px;
+    width: 500px;
+}
+
+mat-card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+mat-card-content {
+    margin-left: 0;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.vacancies-container {
+    width: 500px;
+}

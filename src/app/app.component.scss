@@ -1,0 +1,67 @@
+@use '@angular/material' as mat;
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    column-gap: 50px;
+    position: relative;
+}
+
+aside {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+@media (max-width: 900px) {
+    .header {
+        flex-direction: column;
+        height: 150px;
+    }
+}
+
+@media (max-width: 600px) {
+    mat-button-toggle-group {
+        flex-wrap: wrap;
+    }
+}
+
+.menu {
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+}
+
+.sidenav-container {
+    height: 100%;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-self: self-end;
+}
+
+// mat-sidenav {
+//     width: 200px;
+//     background: mat.get-color-from-palette(mat.$grey-palette, 50);
+
+//     mat-toolbar {
+//         background: mat.get-color-from-palette(mat.$indigo-palette, 500);
+//         color: white;
+//     }
+// }
+
+// mat-toolbar {
+//     position: fixed;
+//     top: 0;
+//     width: 100%;
+//     z-index: 2;
+// }
+
+// mat-sidenav-content {
+//     padding-top: 64px; // Adjust for fixed toolbar height
+//     padding-left: 16px;
+//     padding-right: 16px;
+// }

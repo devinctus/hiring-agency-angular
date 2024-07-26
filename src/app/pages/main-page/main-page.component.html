@@ -1,0 +1,92 @@
+<div class="dashboard-container">
+    <section class="section">
+        <h3>Applicants:</h3>
+        <div class="grid">
+            <mat-card *ngFor="let applicant of recentApplicants" class="card">
+                <mat-card-title
+                    >{{ applicant.name }}
+                    {{ applicant.surname }}</mat-card-title
+                >
+                <mat-card-content>
+                    <p>Professional Area: {{ applicant.professionalArea }}</p>
+                    <p>Qualification: {{ applicant.qualification }}</p>
+                    <p>Salary: {{ applicant.salary | currency }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button
+                        mat-fab
+                        extended
+                        color="accent"
+                        [routerLink]="['/applicants', applicant._id]"
+                    >
+                        <mat-icon>info</mat-icon>
+                        Detailed info
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </section>
+
+    <section class="section">
+        <h3>Employers:</h3>
+        <div class="grid">
+            <mat-card *ngFor="let employer of recentEmployers" class="card">
+                <mat-card-title>{{ employer.companyName }}</mat-card-title>
+                <mat-card-content>
+                    <p>Professional Area: {{ employer.professionalArea }}</p>
+                    <p>Address: {{ employer.address }}</p>
+                    <p>Phone: {{ employer.phone }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button
+                        mat-fab
+                        extended
+                        color="accent"
+                        [routerLink]="['/employers', employer._id]"
+                    >
+                        <mat-icon>info</mat-icon>
+                        Detailed info
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </section>
+
+    <section class="section">
+        <h3>Vacancies:</h3>
+        <div class="grid">
+            <mat-card *ngFor="let vacancy of recentVacancies" class="card">
+                <mat-card-title>{{ vacancy.jobPosition }}</mat-card-title>
+                <mat-card-content>
+                    <p>Professional Area: {{ vacancy.professionalArea }}</p>
+                    <p>Employer: {{ vacancy.employer.companyName }}</p>
+                    <p>Salary: {{ vacancy.salary | currency }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button
+                        mat-fab
+                        extended
+                        color="accent"
+                        [routerLink]="['/vacancies', vacancy._id]"
+                    >
+                        <mat-icon>info</mat-icon>
+                        Detailed info
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </section>
+
+    <section class="section">
+        <h3>Agreements:</h3>
+        <div class="grid">
+            <mat-card *ngFor="let agreement of recentAgreements" class="card">
+                <mat-card-title>{{ agreement.jobPosition }}</mat-card-title>
+                <mat-card-content>
+                    <p>Professional Area: {{ agreement.professionalArea }}</p>
+                    <p>Fees: {{ agreement.fees | currency }}</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </section>
+</div>

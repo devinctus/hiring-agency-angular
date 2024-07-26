@@ -1,0 +1,70 @@
+<div *ngIf="applicant" class="applicant-container">
+    <mat-card>
+        <mat-card-title>
+            {{ applicant.name }} {{ applicant.patronymic }}
+            {{ applicant.surname }}
+        </mat-card-title>
+        <mat-card-content>
+            <p>
+                <strong>Professional Area:</strong>
+                {{ applicant.professionalArea }}
+            </p>
+            <p><strong>Qualification:</strong> {{ applicant.qualification }}</p>
+            <p><strong>Salary:</strong> {{ applicant.salary | currency }}</p>
+            <p *ngIf="applicant.isHired"><strong>Status:</strong> Hired</p>
+            <p *ngIf="applicant.isHired === false">
+                <strong>Status:</strong> Open to work
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button
+                mat-fab
+                extended
+                color="primary"
+                (click)="findVacancies()"
+                [disabled]="applicant.isHired"
+            >
+                <mat-icon>search</mat-icon>
+                Vacancies
+            </button>
+            <button mat-fab extended color="primary" (click)="openEditDialog()">
+                <mat-icon>edit</mat-icon>
+                Edit
+            </button>
+            <button mat-fab extended color="primary" (click)="changeStatus()">
+                <mat-icon>work</mat-icon>
+                Change status
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <div
+        *ngIf="!applicant.isHired && appropriateVacancies.length > 0"
+        class="vacancies-container"
+    >
+        <ng-container *ngFor="let vacancy of appropriateVacancies">
+            <mat-card>
+                <mat-card-subtitle>
+                    <a [routerLink]="['/vacancies', vacancy._id]">
+                        {{ vacancy.jobPosition }}
+                    </a>
+                </mat-card-subtitle>
+                <mat-card-content>
+                    <p>Employer: {{ vacancy.employer.companyName }}</p>
+                    <p>Salary: {{ vacancy.salary | currency }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button
+                        mat-fab
+                        extended
+                        color="primary"
+                        (click)="createAgreement(vacancy)"
+                    >
+                        <mat-icon>check</mat-icon>
+                        Create agreement
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </div>
+</div>

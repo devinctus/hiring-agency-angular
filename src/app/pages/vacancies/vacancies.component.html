@@ -1,0 +1,84 @@
+<div class="vacancies-container">
+    <div class="vacancies-header">
+        <mat-button-toggle-group
+            name="vacancyStatus"
+            aria-label="Vacancy Status"
+            (change)="onVacancyStatusChange($event.value)"
+        >
+            <mat-button-toggle value="All"> All </mat-button-toggle>
+            <mat-button-toggle value="Opened"> Opened </mat-button-toggle>
+            <mat-button-toggle value="Closed"> Closed </mat-button-toggle>
+        </mat-button-toggle-group>
+        <h2>Vacancies</h2>
+        <button mat-fab extended color="primary" (click)="openCreateDialog()">
+            <mat-icon>add</mat-icon>
+            Create New Vacancy
+        </button>
+    </div>
+
+    <div class="vacancies-list">
+        <ng-container *ngFor="let vacancy of filteredVacancies; let i = index">
+            <mat-card
+                *ngIf="
+                    i >= pageIndex * pageSize && i < (pageIndex + 1) * pageSize
+                "
+            >
+                <mat-card-title>
+                    {{ vacancy.jobPosition }}
+                </mat-card-title>
+
+                <mat-card-subtitle>
+                    <p>Professional Area: {{ vacancy.professionalArea }}</p>
+                </mat-card-subtitle>
+
+                <mat-card-subtitle>
+                    Employer:
+                    <a [routerLink]="['/employers', vacancy.employer._id]">{{
+                        vacancy.employer.companyName
+                    }}</a>
+                </mat-card-subtitle>
+                <mat-card-content>
+                    <p>Salary: {{ vacancy.salary | currency }}</p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button
+                        mat-fab
+                        extended
+                        color="accent"
+                        (click)="openUpdateDialog(vacancy)"
+                    >
+                        <mat-icon>edit</mat-icon>
+                        Edit
+                    </button>
+                    <button
+                        mat-fab
+                        extended
+                        color="accent"
+                        (click)="deleteVacancy(vacancy._id)"
+                    >
+                        <mat-icon>delete</mat-icon>
+                        Delete
+                    </button>
+                    <button
+                        mat-fab
+                        extended
+                        color="primary"
+                        [routerLink]="['/vacancies', vacancy._id]"
+                    >
+                        <mat-icon>info</mat-icon>
+                        Details
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </div>
+
+    <mat-paginator
+        [length]="filteredVacancies.length"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        (page)="changePage($event)"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+    ></mat-paginator>
+</div>

@@ -1,1 +1,68 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@include mat.core();
+
+$myapp-theme-primary: mat.m2-define-palette(
+    mat.$m2-indigo-palette,
+    A400,
+    A100,
+    A700
+);
+$myapp-theme-accent: mat.m2-define-palette(mat.$m2-indigo-palette);
+$myapp-theme-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$myapp-theme: mat.m2-define-light-theme(
+    (
+        color: (
+            primary: $myapp-theme-primary,
+            accent: $myapp-theme-accent,
+            warn: $myapp-theme-warn,
+        ),
+    )
+);
+
+@include mat.all-component-themes($myapp-theme);
+
+html,
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+mat-card {
+    padding: 15px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+mat-card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+mat-card-subtitle {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+mat-card-subtitle a {
+    color: #3f51b5;
+    text-decoration: none;
+}
+
+mat-card-content {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+mat-card-actions button {
+    margin-left: 10px;
+}

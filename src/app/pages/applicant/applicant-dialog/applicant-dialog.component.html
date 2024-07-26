@@ -1,0 +1,101 @@
+<h2 mat-dialog-title>
+    {{ mode === 'create' ? 'Create New Applicant' : 'Update Applicant' }}
+</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input
+                matInput
+                placeholder="Howard"
+                formControlName="name"
+                required
+            />
+            <mat-error *ngIf="form.get('name')?.invalid">
+                {{ errorMessage.name }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Surname</mat-label>
+            <input
+                matInput
+                placeholder="Wolowitz"
+                formControlName="surname"
+                required
+            />
+            <mat-error *ngIf="form.get('surname')?.invalid">
+                {{ errorMessage.surname }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Patronymic</mat-label>
+            <input
+                matInput
+                placeholder="Joel"
+                formControlName="patronymic"
+                required
+            />
+            <mat-error *ngIf="form.get('patronymic')?.invalid">
+                {{ errorMessage.patronymic }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Professional Area</mat-label>
+            <mat-select formControlName="professionalArea">
+                <mat-option
+                    *ngFor="let area of professionalAreas"
+                    [value]="area"
+                >
+                    {{ area }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('professionalArea')?.invalid">
+                {{ errorMessage.professionalArea }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Qualification</mat-label>
+            <mat-select
+                formControlName="qualification"
+                [disabled]="!form.get('professionalArea')?.value"
+            >
+                <mat-option
+                    *ngFor="let qualification of qualifications"
+                    [value]="qualification"
+                >
+                    {{ qualification }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('qualification')?.invalid">
+                {{ errorMessage.qualification }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Salary</mat-label>
+            <input
+                matInput
+                placeholder="50000"
+                formControlName="salary"
+                required
+            />
+            <mat-error *ngIf="form.get('salary')?.invalid">
+                {{ errorMessage.salary }}
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-fab extended type="button" (click)="onCancel()">
+            <mat-icon>cancel</mat-icon>
+            Cancel
+        </button>
+        <button mat-fab extended color="primary" type="submit">
+            <mat-icon>done</mat-icon>
+            {{ mode === 'create' ? 'Create' : 'Update' }}
+        </button>
+    </mat-dialog-actions>
+</form>
